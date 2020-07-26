@@ -19,5 +19,10 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
+    @PostMapping("/create")
+    public void createProject(@RequestBody Project project){
+        projectService.createProject(project);
+    }
+
 
 }
