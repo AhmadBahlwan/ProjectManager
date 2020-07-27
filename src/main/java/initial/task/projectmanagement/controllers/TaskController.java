@@ -28,5 +28,22 @@ public class TaskController {
         taskService.addTask(task);
     }
 
+    @GetMapping("/tasks/{taskId}")
+    public Task getTask(@PathVariable String taskId){
+        return taskService.getTask(taskId);
+    }
+
+    @PutMapping("/{projectId}/tasks/{taskId}")
+    public void updateTask(@RequestBody Task task,@PathVariable String projectId, @PathVariable String taskId){
+        task.setProject(projectService.getProject(projectId).get());
+        taskService.updateTask(task);
+    }
+
+    @DeleteMapping("/{projectId}/tasks/{taskId}")
+    public void deleteTask(@PathVariable String projectId,@PathVariable String taskId){
+        taskService.deleteTask(projectId,taskId);
+    }
+
+
 
 }

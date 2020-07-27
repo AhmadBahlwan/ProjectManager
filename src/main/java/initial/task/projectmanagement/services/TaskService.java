@@ -22,4 +22,29 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public Task getTask(String taskId){
+        return taskRepository.findById(taskId).get();
+    }
+
+    public void updateTask(Task task) {
+        taskRepository.save(task);
+    }
+
+    public void deleteTask(String projectId,String taskId) {
+        Task currentTask = getTaskOfProject(projectId,taskId);
+        if (currentTask !=null){
+            taskRepository.deleteById(taskId);
+        }
+
+    }
+
+    private Task getTaskOfProject(String projectId, String taskId) {
+        List<Task> tasks = taskRepository.findByProjectId(projectId);
+        for (Task task : tasks) {
+            if (task.getId() == taskId) {
+                return task;
+            }
+        }
+        return null;
+    }
 }
