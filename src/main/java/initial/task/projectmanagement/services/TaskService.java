@@ -38,6 +38,24 @@ public class TaskService {
 
     }
 
+    public void completeTask(String projectId, String taskId) {
+        Task currentTask = getTaskOfProject(projectId,taskId);
+        if (currentTask !=null){
+            currentTask.setCompleted(true);
+            taskRepository.save(currentTask);
+        }
+    }
+
+    public void unDoTask(String projectId, String taskId){
+
+        Task currentTask = getTaskOfProject(projectId,taskId);
+        if (currentTask !=null){
+            currentTask.setCompleted(false);
+            taskRepository.save(currentTask);
+        }
+
+    }
+
     private Task getTaskOfProject(String projectId, String taskId) {
         List<Task> tasks = taskRepository.findByProjectId(projectId);
         for (Task task : tasks) {

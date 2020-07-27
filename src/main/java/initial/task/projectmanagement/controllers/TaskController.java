@@ -45,5 +45,16 @@ public class TaskController {
     }
 
 
+    @PutMapping("/{projectId}/tasks/{taskId}/complete")
+    public void completeTask(@RequestBody Task task, @PathVariable String projectId, @PathVariable String taskId){
+        taskService.completeTask(projectId,taskId);
+    }
+
+
+    @PutMapping("/{projectId}/tasks/{taskId}/undo")
+    public void undDoTask(@RequestBody Task task, @PathVariable String projectId, @PathVariable String taskId){
+        taskService.unDoTask(projectId,taskId);
+    }
+
 
 }
